@@ -50,22 +50,22 @@
     }
 
     .tiles__tile--a {
-        background-image: url("/scrabble-tiles/A.svg");
+        background-image: url("/leaderboard-component/scrabble-tiles/A.svg");
     }
 
     .tiles__tile--b {
-        background-image: url("/scrabble-tiles/B.svg");
+        background-image: url("/leaderboard-component/scrabble-tiles/B.svg");
     }
 
     .tiles__tile--c {
-        background-image: url("/scrabble-tiles/C.svg");
+        background-image: url("/leaderboard-component/scrabble-tiles/C.svg");
     }
 
     .tiles__tile--d {
-        background-image: url("/scrabble-tiles/D.svg");
+        background-image: url("/leaderboard-component/scrabble-tiles/D.svg");
     }
 
     .tiles__tile--e {
-        background-image: url("/scrabble-tiles/E.svg");
+        background-image: url("/leaderboard-component/scrabble-tiles/E.svg");
     }
 </style>
