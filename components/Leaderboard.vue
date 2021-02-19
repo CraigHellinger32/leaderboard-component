@@ -23,7 +23,11 @@
                 return name.replace(/ /g,"_").split("");
             },
             getTileClass(letter) {
-                return 'tiles__tile tiles__tile--' + letter.toLowerCase();
+                if (letter === ' ') {
+                    return 'tiles__tile tiles__tile--space';
+                } else {
+                    return 'tiles__tile tiles__tile--' + letter.toLowerCase();
+                }
             }
         }
     }
@@ -36,6 +40,7 @@
 
     .list__item {
         color: #fff;
+        margin: .5rem 0;
     }
 
     .leaderboard__tiles {
@@ -71,7 +76,7 @@
         @return $split-arr;
     }
 
-    $alphabetArray: str-split("a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z", ",");
+    $alphabetArray: str-split("a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,_", ",");
 
     @each $value in $alphabetArray {
         .tiles__tile--#{$value} {
