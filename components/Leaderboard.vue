@@ -49,23 +49,33 @@
         width: 44px;
     }
 
-    .tiles__tile--a {
-        background-image: url("/leaderboard-component/scrabble-tiles/A.svg");
+    @function str-split($string, $separator) {
+        // empty array/list
+        $split-arr: ();
+        // first index of separator in string
+        $index : str-index($string, $separator);
+        // loop through string
+        @while $index != null {
+            // get the substring from the first character to the separator
+            $item: str-slice($string, 1, $index - 1);
+            // push item to array
+            $split-arr: append($split-arr, $item);
+            // remove item and separator from string
+            $string: str-slice($string, $index + 1);
+            // find new index of separator
+            $index : str-index($string, $separator);
+        }
+        // add the remaining string to list (the last item)
+        $split-arr: append($split-arr, $string);
+
+        @return $split-arr;
     }
 
-    .tiles__tile--b {
-        background-image: url("/leaderboard-component/scrabble-tiles/B.svg");
-    }
+    $alphabetArray: str-split("a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z", ",");
 
-    .tiles__tile--c {
-        background-image: url("/leaderboard-component/scrabble-tiles/C.svg");
-    }
-
-    .tiles__tile--d {
-        background-image: url("/leaderboard-component/scrabble-tiles/D.svg");
-    }
-
-    .tiles__tile--e {
-        background-image: url("/leaderboard-component/scrabble-tiles/E.svg");
+    @each $value in $alphabetArray {
+        .tiles__tile--#{$value} {
+            background-image: url("/leaderboard-component/scrabble-tiles/#{to-upper-case($value)}.svg");
+        }
     }
 </style>
