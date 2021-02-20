@@ -1,11 +1,21 @@
 <template>
     <div class="leaderboard">
-        <ol class="list leaderboard__list" v-for="list in players">
-            <li class="list__item" v-for="player in list" :key="player.id">
+        <ol class="list leaderboard__list">
+            <li class="list__item" v-for="player in filteredData" :key="player.id">
                 <span class="leaderboard__tiles tiles">
                     <span :class="getTileClass(letter)" v-for="letter in splitWord(player.Name)" />
                 </span>
                 <span class="visually-hidden">{{ player.Name }}</span>
+                <ul class="leaderboard__stats stats">
+                    <li class="stats__item stats__item--score">
+                        <span class="stats__label">Score:</span>
+                        <span class="stats__value">{{ player.results[0].TotalScore }}</span>
+                    </li>
+                    <li class="stats__item stats__item--games">
+                        <span class="stats__label">Games Played:</span>
+                        <span class="stats__value">{{ player.results[0].GamesPlayed }}</span>
+                    </li>
+                </ul>
             </li>
         </ol>
     </div>

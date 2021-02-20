@@ -18,8 +18,43 @@
         data() {
             return {
                 players: playersJson,
+                results: leaderboardJson.Results,
                 filteredData: []
             }
+        },
+        methods: {
+            filterHandler: function(filter) {
+                this.filteredData = this.players.Players;
+
+                var resultsData = this.results,
+                    resultsIdCheck = function(id, resultsData) {
+                        if (id === resultsData.PlayerId) return true;
+                    },
+                    compareRank = function(a, b) {
+                        if ( a.results[0].TotalScore > b.results[0].TotalScore ){
+                            return -1;
+                        }
+                        if ( a.results[0].TotalScore < b.results[0].TotalScore ){
+                            return 1;
+                        }
+                        return 0;
+                    }
+
+                this.filteredData.forEach(combineResults);
+
+                function combineResults(item) {
+                    item.results = resultsData.filter(obj => resultsIdCheck(item.PlayerId, obj));
+                }
+
+                if (filter === 'rank') {
+                    this.filteredData.sort(compareRank);
+                } else {
+                  // games played
+                }
+            }
+        },
+        mounted() {
+            this.filterHandler('rank');
         }
     }
 </script>
