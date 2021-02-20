@@ -45,16 +45,80 @@
 
 <style lang="scss" scoped>
     .leaderboard {
-        padding: .5rem;
+        padding: .5rem 1rem;
     }
 
     .leaderboard__list {
+        counter-reset: list_item_count;
         text-align: left;
     }
 
     .list__item {
+        border-bottom: 1px solid #ccc;
         color: #fff;
+        counter-increment: list_item_count;
         margin: .5rem 0;
+        padding: .5rem 0 .5rem 3rem;
+        position: relative;
+
+        &::before {
+            content: counter(list_item_count) 'th';
+            font-size: 18px;
+            font-weight: bold;
+            left: 0;
+            position: absolute;
+            text-align: center;
+            // transform: translateX(-($list-inset-margin / 3 + $list-bullet-size / 2));
+        }
+
+        &:last-child {
+            border-bottom: 0;
+        }
+
+        &:nth-child(-n+3) {
+            &::after {
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: left;
+                content: '';
+                display: block;
+                height: 40px;
+                left: -.5rem;
+                position: absolute;
+                top: 2.5rem;
+                width: 3rem;
+            }
+        }
+
+        &:nth-child(1) {
+            &::before {
+                content: counter(list_item_count) 'st';
+            }
+
+            &::after {
+                background-image: url('@/static/trophy-gold.svg');
+            }
+        }
+
+        &:nth-child(2) {
+            &::before {
+                content: counter(list_item_count) 'nd';
+            }
+
+            &::after {
+                background-image: url('@/static/trophy-silver.svg');
+            }
+        }
+
+        &:nth-child(3) {
+            &::before {
+                content: counter(list_item_count) 'rd';
+            }
+
+            &::after {
+                background-image: url('@/static/trophy-bronze.svg');
+            }
+        }
     }
 
     .leaderboard__tiles {

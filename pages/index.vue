@@ -102,6 +102,7 @@
   font-size: 30px;
   color: #fff;
   letter-spacing: 1px;
+  line-height: 1.1;
 }
 
 .links {
