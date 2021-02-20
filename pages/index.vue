@@ -5,6 +5,7 @@
       <h1 class="title">
         Scrabble Leaderboard
       </h1>
+      <ToggleSwitch />
       <Leaderboard :filteredData="filteredData" :players="players" />
     </div>
   </main>

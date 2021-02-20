@@ -44,6 +44,10 @@
 </script>
 
 <style lang="scss" scoped>
+    .leaderboard {
+        padding: .5rem;
+    }
+
     .leaderboard__list {
         text-align: left;
     }
