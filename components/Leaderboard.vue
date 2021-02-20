@@ -127,9 +127,27 @@
     }
 
     .tiles__tile {
+        border-radius: 3px;
+        box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, .75);
         height: 44px;
         margin: 0 3px 3px 0;
         width: 44px;
+
+        &:nth-child(odd) {
+            transform: rotate(1deg);
+        }
+
+        &:nth-child(even) {
+            transform: rotate(-1deg);
+        }
+
+        &:nth-child(3n-4) {
+            transform: rotate(-2deg);
+        }
+
+        &:nth-child(5n-4) {
+            transform: rotate(2deg);
+        }
     }
 
     @function str-split($string, $separator) {
