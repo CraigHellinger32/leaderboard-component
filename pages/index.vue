@@ -5,7 +5,7 @@
       <h1 class="title">
         Scrabble Leaderboard
       </h1>
-      <ToggleSwitch />
+      <ToggleSwitch @toggle-update="toggleUpdateHandler($event)" />
       <Leaderboard :filteredData="filteredData" :players="players" />
     </div>
   </main>
@@ -20,11 +20,12 @@
             return {
                 players: playersJson,
                 results: leaderboardJson.Results,
-                filteredData: []
+                filteredData: [],
+                state: 'rank'
             }
         },
         methods: {
-            filterHandler: function(filter) {
+            filterHandler: function() {
                 this.filteredData = this.players.Players;
 
                 var resultsData = this.results,
@@ -39,6 +40,15 @@
                             return 1;
                         }
                         return 0;
+                    },
+                    compareGamesPlayed = function(a, b) {
+                        if ( a.results[0].GamesPlayed > b.results[0].GamesPlayed ){
+                            return -1;
+                        }
+                        if ( a.results[0].GamesPlayed < b.results[0].GamesPlayed ){
+                            return 1;
+                        }
+                        return 0;
                     }
 
                 this.filteredData.forEach(combineResults);
@@ -47,15 +57,24 @@
                     item.results = resultsData.filter(obj => resultsIdCheck(item.PlayerId, obj));
                 }
 
-                if (filter === 'rank') {
+                if (this.state === 'rank') {
                     this.filteredData.sort(compareRank);
                 } else {
-                  // games played
+                    this.filteredData.sort(compareGamesPlayed);
                 }
+            },
+            toggleUpdateHandler(toggleChecked) {
+                if (toggleChecked == true) {
+                    this.state = 'rank'
+                } else {
+                    this.state = 'games-played'
+                }
+
+                this.filterHandler();
             }
         },
         mounted() {
-            this.filterHandler('rank');
+            this.filterHandler();
         }
     }
 </script>
